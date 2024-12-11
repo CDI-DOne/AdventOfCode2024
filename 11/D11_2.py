@@ -49,6 +49,12 @@ def main():
     end = time.time()
     print("Time elapsed for 1000 blinks: ", end - start)
 
+    # Ranking: After 10000 blinks
+    start = time.time()
+    result_1000_blinks = simulate_blinks(initial_stones, 1000)
+    print(f"Number of stones after 10000 blinks: {result_1000_blinks}")
+    end = time.time()
+    print("Time elapsed for 10000 blinks: ", end - start)
 
 if __name__ == "__main__":
     main()
