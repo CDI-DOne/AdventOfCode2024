@@ -1,0 +1,63 @@
+def parse_map(input_map):
+    grid = []
+    guard_position = None
+    for y, line in enumerate(input_map.strip().split('\n')):
+        grid.append(list(line))
+        for x, char in enumerate(line):
+            if char in ['^', '>', 'v', '<']:
+                guard_position = (x, y)
+                guard_direction = char
+    return grid, guard_position, guard_direction
+
+def move_guard(position, direction):
+    x, y = position
+    if direction == '^':
+        return (x, y - 1)
+    elif direction == 'v':
+        return (x, y + 1)
+    elif direction == '>':
+        return (x + 1, y)
+    elif direction == '<':
+        return (x - 1, y)
+
+def turn_right(direction):
+    if direction == '^':
+        return '>'
+    elif direction == '>':
+        return 'v'
+    elif direction == 'v':
+        return '<'
+    elif direction == '<':
+        return '^'
+
+def simulate_patrol(input_map):
+    grid, guard_position, guard_direction = parse_map(input_map)
+    visited_positions = set()
+    visited_positions.add(guard_position)
+
+    rows, cols = len(grid), len(grid[0])
+
+    while True:
+        next_position = move_guard(guard_position, guard_direction)
+        x, y = next_position
+
+        # Check if the guard is out of bounds
+        if not (0 <= x < cols and 0 <= y < rows):
+            break
+
+        # Check if there's an obstacle in front of the guard
+        if grid[y][x] == '#':
+            guard_direction = turn_right(guard_direction)
+        else:
+            # Move the guard forward
+            guard_position = next_position
+            visited_positions.add(guard_position)
+
+    return visited_positions
+
+# Example usage
+with open('Input.txt', 'r') as file:
+    input_map = file.read()
+
+visited_positions = simulate_patrol(input_map)
+print("Number of distinct positions visited:", len(visited_positions))
