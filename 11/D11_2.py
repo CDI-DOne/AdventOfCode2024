@@ -30,7 +30,7 @@ def simulate_blinks(initial_stones, blinks):
 def main():
     # Initial stones
     # Read input from input.txt
-    with open("11/input.txt", "r") as file:
+    with open("Input.txt", "r") as file:
         initial_stones = list(map(int, file.read().strip().split()))
 
     # Part 1: After 25 blinks
@@ -44,14 +44,14 @@ def main():
     # Ranking: After 1000 blinks
     start = time.time()
     result_1000_blinks = simulate_blinks(initial_stones, 1000)
-    #print(f"Number of stones after 1000 blinks: {result_1000_blinks}")
+    print(f"Number of stones after 1000 blinks: {result_1000_blinks}")
     end = time.time()
     print("Time elapsed for 1000 blinks: ", end - start)
 
     # Ranking: After 10000 blinks
     start = time.time()
     result_1000_blinks = simulate_blinks(initial_stones, 10000)
-   #print(f"Number of stones after 10000 blinks: {result_1000_blinks}")
+    print(f"Number of stones after 10000 blinks: {result_1000_blinks}")
     end = time.time()
     print("Time elapsed for 10000 blinks: ", end - start)
 
